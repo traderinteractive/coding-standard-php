@@ -30,5 +30,9 @@
     "require-dev": {
         "php-coveralls/php-coveralls": "^2.5",
         "phpunit/phpunit": ">=6.5"
+    },
+    "scripts": {
+        "lint": "vendor/bin/phpcs",
+        "test": "vendor/bin/phpunit"
     }
 }

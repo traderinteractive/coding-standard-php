@@ -1,7 +1,4 @@
 # DWS Coding Standard
-[![Build Status](https://travis-ci.org/traderinteractive/dws-coding-standard.svg?branch=master)](https://travis-ci.org/traderinteractive/dws-coding-standard)
-[![Coverage Status](https://coveralls.io/repos/github/traderinteractive/dws-coding-standard/badge.svg)](https://coveralls.io/github/traderinteractive/dws-coding-standard)
-
 [![Latest Stable Version](https://poser.pugx.org/traderinteractive/coding-standard/v/stable)](https://packagist.org/packages/traderinteractive/coding-standard)
 [![Latest Unstable Version](https://poser.pugx.org/traderinteractive/coding-standard/v/unstable)](https://packagist.org/packages/traderinteractive/coding-standard)
 [![License](https://poser.pugx.org/traderinteractive/coding-standard/license)](https://packagist.org/packages/traderinteractive/coding-standard)
@@ -31,8 +28,8 @@ Then to use it, you can run the following (or add to your build process):
 
 Developers may be contacted at:
 
- * [Pull Requests](https://github.com/traderinteractive/dws-coding-standard/pulls)
- * [Issues](https://github.com/traderinteractive/dws-coding-standard/issues)
+ * [Pull Requests](https://github.com/traderinteractive/coding-standard-php/pulls)
+ * [Issues](https://github.com/traderinteractive/coding-standard-php/issues)
 
 ## Tests
 
