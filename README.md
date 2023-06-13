@@ -28,8 +28,8 @@ Then to use it, you can run the following (or add to your build process):
 
 Developers may be contacted at:
 
- * [Pull Requests](https://github.com/traderinteractive/dws-coding-standard/pulls)
- * [Issues](https://github.com/traderinteractive/dws-coding-standard/issues)
+ * [Pull Requests](https://github.com/traderinteractive/coding-standard-php/pulls)
+ * [Issues](https://github.com/traderinteractive/coding-standard-php/issues)
 
 ## Tests
 
