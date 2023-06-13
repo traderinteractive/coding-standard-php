@@ -6,13 +6,18 @@
  * @subpackage Sniffs
  */
 
+namespace DWS\Sniffs\Arrays;
+
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Files\File;
+
 /**
  * A test to ensure that arrows in arrays are set with proper whitespace.
  *
  * @package DWS
  * @subpackage Sniffs
  */
-final class DWS_Sniffs_Arrays_ArrowSpacingSniff implements PHP_CodeSniffer_Sniff
+final class ArrowSpacingSniff implements Sniff
 {
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -27,12 +32,12 @@ final class DWS_Sniffs_Arrays_ArrowSpacingSniff implements PHP_CodeSniffer_Sniff
     /**
      * Processes this sniff, when one of its tokens is encountered.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The current file being checked.
+     * @param PHP_CodeSniffer\Files\File $phpcsFile The current file being checked.
      * @param int $stackPtr The position of the current token in the stack passed in $tokens.
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 

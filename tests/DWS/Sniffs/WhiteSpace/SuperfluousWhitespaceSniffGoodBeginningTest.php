@@ -1,4 +1,5 @@
 <?php
+
 final class DWS_Sniffs_WhiteSpace_SuperfluousWhitespaceSniffGoodBeginningTest extends AbstractSniffUnitTest
 {
     public function getErrorList()

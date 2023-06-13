@@ -6,13 +6,20 @@
  * @subpackage Sniffs
  */
 
+namespace DWS\Sniffs\WhiteSpace;
+
+use DWS\Helpers;
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Tokens;
+
 /**
  * Verifies that there is one space around operators.
  *
  * @package DWS
  * @subpackage Sniffs
  */
-final class DWS_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffer_Sniff
+final class OperatorSpacingSniff implements Sniff
 {
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -23,10 +30,10 @@ final class DWS_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffe
     {
         return array_unique(
             array_merge(
-                PHP_CodeSniffer_Tokens::$comparisonTokens,
-                PHP_CodeSniffer_Tokens::$operators,
-                PHP_CodeSniffer_Tokens::$assignmentTokens,
-                PHP_CodeSniffer_Tokens::$booleanOperators,
+                Tokens::$comparisonTokens,
+                Tokens::$operators,
+                Tokens::$assignmentTokens,
+                Tokens::$booleanOperators,
                 [T_INLINE_THEN, T_INLINE_ELSE, T_BOOLEAN_NOT, T_STRING_CONCAT]
             )
         );
@@ -36,12 +43,12 @@ final class DWS_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffe
     /**
      * Processes this test, when one of its tokens is encountered.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int $stackPtr The position of the current token in the stack passed in $tokens.
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $operator = $tokens[$stackPtr]['content'];
@@ -57,7 +64,7 @@ final class DWS_Sniffs_WhiteSpace_OperatorSpacingSniff implements PHP_CodeSniffe
         $nextNonEmpty = $phpcsFile->findNext(T_WHITESPACE, $stackPtr + 1, null, true);
         $nextSplitsLine = $tokens[$nextNonEmpty]['line'] !== $tokens[$stackPtr]['line'];
 
-        if (DWS_Helpers_Operator::isUnary($phpcsFile, $stackPtr)) {
+        if (Helpers\Operator::isUnary($phpcsFile, $stackPtr)) {
             if (
                 !$previousSplitsLine &&
                 $previousSpaces !== 1 &&

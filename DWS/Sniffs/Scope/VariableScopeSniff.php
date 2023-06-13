@@ -6,13 +6,19 @@
  * @subpackage Sniffs
  */
 
+namespace DWS\Sniffs\Scope;
+
+use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Tokens;
+
 /**
  * Verifies that all variables are declared in the proper scope.
  *
  * @package DWS
  * @subpackage Sniffs
  */
-final class DWS_Sniffs_Scope_VariableScopeSniff extends PHP_CodeSniffer_Standards_AbstractVariableSniff
+final class VariableScopeSniff extends AbstractVariableSniff
 {
     /**
      * This stores the first scope level that a variable is encountered
@@ -22,24 +28,24 @@ final class DWS_Sniffs_Scope_VariableScopeSniff extends PHP_CodeSniffer_Standard
     /**
      * Processes normal variables.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file where this token was found.
+     * @param PHP_CodeSniffer\Files\File $phpcsFile The file where this token was found.
      * @param int $stackPtr The position where the token was found.
      *
      * @return void
      */
-    protected function processVariable(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    protected function processVariable(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $variableName = $tokens[$stackPtr]['content'];
         $scopeIdentifier = $phpcsFile->getFilename() . $variableName;
         $level = $tokens[$stackPtr]['level'];
         $functionIndex = $phpcsFile->findPrevious(T_FUNCTION, $stackPtr);
-        $lastScopeOpen = $phpcsFile->findPrevious(PHP_CodeSniffer_Tokens::$scopeOpeners, $stackPtr);
+        $lastScopeOpen = $phpcsFile->findPrevious(Tokens::$scopeOpeners, $stackPtr);
 
         //Inline scope openers do not increment the level value
         $scopeOpenDistance = $tokens[$stackPtr]['line'] - $tokens[$lastScopeOpen]['line'];
         if (
-            in_array($tokens[$lastScopeOpen]['code'], PHP_CodeSniffer_Tokens::$scopeOpeners) === true
+            in_array($tokens[$lastScopeOpen]['code'], Tokens::$scopeOpeners) === true
             && ($scopeOpenDistance === 1 || $scopeOpenDistance === 0)//Include the variables in the condition
             && $tokens[$stackPtr]['level'] === $tokens[$lastScopeOpen]['level']
         ) {
@@ -77,12 +83,12 @@ final class DWS_Sniffs_Scope_VariableScopeSniff extends PHP_CodeSniffer_Standard
     /**
      * Processes the function tokens within the class.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file where this token was found.
+     * @param PHP_CodeSniffer\Files\File $phpcsFile The file where this token was found.
      * @param int $stackPtr The position where the token was found.
      *
      * @return void
      */
-    protected function processMemberVar(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    protected function processMemberVar(File $phpcsFile, $stackPtr)
     {
         //Do Nothing
     }
@@ -90,12 +96,12 @@ final class DWS_Sniffs_Scope_VariableScopeSniff extends PHP_CodeSniffer_Standard
     /**
      * Processes variables in double quoted strings.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file where this token was found.
+     * @param PHP_CodeSniffer\Files\File $phpcsFile The file where this token was found.
      * @param int $stackPtr The position where the token was found.
      *
      * @return void
      */
-    protected function processVariableInString(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    protected function processVariableInString(File $phpcsFile, $stackPtr)
     {
         //Do Nothing
     }

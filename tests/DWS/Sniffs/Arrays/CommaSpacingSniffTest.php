@@ -1,5 +1,4 @@
 <?php
-require_once dirname(dirname(dirname(__DIR__))) . '/AbstractSniffUnitTest.php';
 
 final class DWS_Sniffs_Arrays_CommaSpacingSniffTest extends AbstractSniffUnitTest
 {

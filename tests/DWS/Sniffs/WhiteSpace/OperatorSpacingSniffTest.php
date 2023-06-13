@@ -1,4 +1,5 @@
 <?php
+
 final class DWS_Sniffs_WhiteSpace_OperatorSpacingSniffTest extends AbstractSniffUnitTest
 {
     public function getErrorList()

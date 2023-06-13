@@ -6,23 +6,28 @@
  * @subpackage Helpers
  */
 
+namespace DWS\Helpers;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Tokens;
+
 /**
  * A collection of helper methods for operators.
  *
  * @package DWS
  * @subpackage Helpers
  */
-final class DWS_Helpers_Operator
+final class Operator
 {
     /**
      * Given a pointer to a bracketed expression (such as T_ARRAY or T_OPEN_SHORT_ARRAY), returns the stack pointer for the opening bracket.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file where the bracketed expression is declared.
+     * @param PHP_CodeSniffer\Files\File $phpcsFile The file where the bracketed expression is declared.
      * @param int $stackPtr The position of the expression element in the stack in $phpcsFile.
      *
      * @return int The position of the opening bracket, or if not found, the given $stackPtr.
      */
-    public static function isUnary(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public static function isUnary(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -38,9 +43,9 @@ final class DWS_Helpers_Operator
             $prev = $phpcsFile->findPrevious(T_WHITESPACE, $stackPtr - 1, null, true);
             $unaryHints = array_unique(
                 array_merge(
-                    PHP_CodeSniffer_Tokens::$comparisonTokens,
-                    PHP_CodeSniffer_Tokens::$operators,
-                    PHP_CodeSniffer_Tokens::$assignmentTokens,
+                    Tokens::$comparisonTokens,
+                    Tokens::$operators,
+                    Tokens::$assignmentTokens,
                     [
                         T_RETURN,
                         T_COMMA,

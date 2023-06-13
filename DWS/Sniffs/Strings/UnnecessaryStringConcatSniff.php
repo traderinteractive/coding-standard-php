@@ -7,6 +7,12 @@
  * @subpackage Sniffs
  */
 
+namespace DWS\Sniffs\Strings;
+
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Tokens;
+
 /**
  * Checks that two strings are not concatenated together; suggests
  * using one string instead.
@@ -14,7 +20,7 @@
  * @package DWS
  * @subpackage Sniffs
  */
-final class DWS_Sniffs_Strings_UnnecessaryStringConcatSniff implements PHP_CodeSniffer_Sniff
+final class UnnecessaryStringConcatSniff implements Sniff
 {
     /**
      * The limit that the length of a line should not exceed.
@@ -43,12 +49,12 @@ final class DWS_Sniffs_Strings_UnnecessaryStringConcatSniff implements PHP_CodeS
     /**
      * Processes this test, when one of its tokens is encountered.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int $stackPtr The position of the current token in the stack passed in $tokens.
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         // Work out which type of file this is for.
         $tokens = $phpcsFile->getTokens();
@@ -60,7 +66,7 @@ final class DWS_Sniffs_Strings_UnnecessaryStringConcatSniff implements PHP_CodeS
         $prev = $phpcsFile->findPrevious(T_WHITESPACE, $stackPtr - 1, null, true);
         $next = $phpcsFile->findNext(T_WHITESPACE, $stackPtr + 1, null, true);
 
-        $stringTokens = PHP_CodeSniffer_Tokens::$stringTokens;
+        $stringTokens = Tokens::$stringTokens;
         //See if the characters before and after the concatenation are quotes
         if (
             in_array($tokens[$prev]['code'], $stringTokens) !== true ||
