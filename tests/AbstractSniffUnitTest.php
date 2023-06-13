@@ -6,6 +6,8 @@
  * @package   PHP_CodeSniffer
  */
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * An abstract class that all sniff unit tests must extend.
  *
@@ -16,7 +18,7 @@
  * @category  PHP
  * @package   PHP_CodeSniffer
  */
-abstract class AbstractSniffUnitTest extends PHPUnit_Framework_TestCase
+abstract class AbstractSniffUnitTest extends TestCase
 {
     /**
      * The PHP_CodeSniffer object used for testing.
@@ -24,19 +26,6 @@ abstract class AbstractSniffUnitTest extends PHPUnit_Framework_TestCase
      * @var PHP_CodeSniffer
      */
     protected static $_phpcs = null;
-
-    /**
-     * Sets up this unit test.
-     *
-     * @return void
-     */
-    protected function setUp()
-    {
-        if (self::$_phpcs === null) {
-            self::$_phpcs = new PHP_CodeSniffer();
-            self::$_phpcs->cli->setCommandLineValues(['-s']);
-        }
-    }
 
     /**
      * Tests the extending classes Sniff class.
@@ -47,6 +36,11 @@ abstract class AbstractSniffUnitTest extends PHPUnit_Framework_TestCase
      */
     public final function runTest()
     {
+        if (self::$_phpcs === null) {
+            self::$_phpcs = new PHP_CodeSniffer();
+            self::$_phpcs->cli->setCommandLineValues(['-s']);
+        }
+
         self::$_phpcs->process([], 'DWS', [$this->_getSniffName()]);
         self::$_phpcs->setIgnorePatterns([]);
 
@@ -72,6 +66,8 @@ abstract class AbstractSniffUnitTest extends PHPUnit_Framework_TestCase
         if (count($failureMessages) > 0) {
             $this->fail(implode("\n", $failureMessages));
         }
+
+        $this->assertEmpty($failureMessages);
     }
 
     /**
