@@ -14,6 +14,6 @@ final class DWS_Sniffs_ControlStructures_ControlSignatureSniffTest extends Abstr
 
     protected function _getSniffName()
     {
-        return 'DWS.ControlStructures.ControlSignature';
+        return '/DWS/Sniffs/ControlStructures/ControlSignatureSniff.php';
     }
 }

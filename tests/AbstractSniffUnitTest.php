@@ -31,10 +31,8 @@ abstract class AbstractSniffUnitTest extends TestCase
     {
         $config = new \PHP_CodeSniffer\Config();
         $ruleset = new \PHP_CodeSniffer\Ruleset($config);
-        $ruleset->registerSniffs([$this->_getSniffName()], [], []);
+        $ruleset->registerSniffs([dirname(__DIR__) . $this->_getSniffName()], [], []);
         $ruleset->populateTokenListeners();
-
-        //self::$_phpcs->cli->setCommandLineValues(['-s']);
 
         $testFile = dirname(__DIR__) . '/tests/' . str_replace('_', '/', get_class($this)) . '.inc';
         if (!file_exists($testFile)) {

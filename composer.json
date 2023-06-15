@@ -29,10 +29,12 @@
     },
     "require-dev": {
         "php-coveralls/php-coveralls": "^2.5",
-        "phpunit/phpunit": ">=6.5"
+        "phpunit/phpunit": "^6.5 || ^9"
     },
     "autoload": {
-        "psr-4": { "DWS\\": "src" }
+        "psr-4": {
+            "DWS\\": "src"
+        }
     },
     "scripts": {
         "lint": "vendor/bin/phpcs",

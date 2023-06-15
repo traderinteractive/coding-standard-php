@@ -31,6 +31,6 @@ final class DWS_Sniffs_WhiteSpace_OperatorSpacingSniffTest extends AbstractSniff
 
     protected function _getSniffName()
     {
-        return 'DWS.WhiteSpace.OperatorSpacing';
+        return '/DWS/Sniffs/WhiteSpace/OperatorSpacingSniff.php';
     }
 }

@@ -35,6 +35,6 @@ final class DWS_Sniffs_WhiteSpace_ControlStructureInteriorSpacingSniffTest exten
 
     protected function _getSniffName()
     {
-        return 'DWS.WhiteSpace.ControlStructureInteriorSpacing';
+        return '/DWS/Sniffs/WhiteSpace/ControlStructureInteriorSpacingSniff.php';
     }
 }

@@ -14,6 +14,6 @@ final class DWS_Sniffs_WhiteSpace_SuperfluousWhitespaceSniffTest extends Abstrac
 
     protected function _getSniffName()
     {
-        return 'DWS.WhiteSpace.SuperfluousWhitespace';
+        return '/DWS/Sniffs/WhiteSpace/SuperfluousWhitespaceSniff.php';
     }
 }
