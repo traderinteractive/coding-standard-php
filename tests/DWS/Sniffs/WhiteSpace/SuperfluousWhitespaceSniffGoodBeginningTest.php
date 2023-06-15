@@ -1,4 +1,5 @@
 <?php
+
 final class DWS_Sniffs_WhiteSpace_SuperfluousWhitespaceSniffGoodBeginningTest extends AbstractSniffUnitTest
 {
     public function getErrorList()
@@ -13,6 +14,6 @@ final class DWS_Sniffs_WhiteSpace_SuperfluousWhitespaceSniffGoodBeginningTest ex
 
     protected function _getSniffName()
     {
-        return 'DWS.WhiteSpace.SuperfluousWhitespace';
+        return '/DWS/Sniffs/WhiteSpace/SuperfluousWhitespaceSniff.php';
     }
 }

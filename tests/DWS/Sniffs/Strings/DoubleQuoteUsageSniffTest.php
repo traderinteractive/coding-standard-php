@@ -1,4 +1,5 @@
 <?php
+
 final class DWS_Sniffs_Strings_DoubleQuoteUsageSniffTest extends AbstractSniffUnitTest
 {
     public function getErrorList()
@@ -13,6 +14,6 @@ final class DWS_Sniffs_Strings_DoubleQuoteUsageSniffTest extends AbstractSniffUn
 
     protected function _getSniffName()
     {
-        return 'DWS.Strings.DoubleQuoteUsage';
+        return '/DWS/Sniffs/Strings/DoubleQuoteUsageSniff.php';
     }
 }

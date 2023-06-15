@@ -1,4 +1,5 @@
 <?php
+
 final class DWS_Sniffs_Strings_EmbeddedVariablesSniffTest extends AbstractSniffUnitTest
 {
     public function getErrorList()
@@ -13,6 +14,6 @@ final class DWS_Sniffs_Strings_EmbeddedVariablesSniffTest extends AbstractSniffU
 
     protected function _getSniffName()
     {
-        return 'DWS.Strings.EmbeddedVariables';
+        return '/DWS/Sniffs/Strings/EmbeddedVariablesSniff.php';
     }
 }

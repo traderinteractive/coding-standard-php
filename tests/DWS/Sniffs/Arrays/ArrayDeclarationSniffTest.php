@@ -1,5 +1,4 @@
 <?php
-require_once dirname(dirname(dirname(__DIR__))) . '/AbstractSniffUnitTest.php';
 
 final class DWS_Sniffs_Arrays_ArrayDeclarationSniffTest extends AbstractSniffUnitTest
 {
@@ -15,6 +14,6 @@ final class DWS_Sniffs_Arrays_ArrayDeclarationSniffTest extends AbstractSniffUni
 
     protected function _getSniffName()
     {
-        return 'DWS.Arrays.ArrayDeclaration';
+        return '/DWS/Sniffs/Arrays/ArrayDeclarationSniff.php';
     }
 }

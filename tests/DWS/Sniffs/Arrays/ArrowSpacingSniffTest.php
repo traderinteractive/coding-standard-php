@@ -1,5 +1,4 @@
 <?php
-require_once dirname(dirname(dirname(__DIR__))) . '/AbstractSniffUnitTest.php';
 
 final class DWS_Sniffs_Arrays_ArrowSpacingSniffTest extends AbstractSniffUnitTest
 {
@@ -15,6 +14,6 @@ final class DWS_Sniffs_Arrays_ArrowSpacingSniffTest extends AbstractSniffUnitTes
 
     protected function _getSniffName()
     {
-        return 'DWS.Arrays.ArrowSpacing';
+        return '/DWS/Sniffs/Arrays/ArrowSpacingSniff.php';
     }
 }

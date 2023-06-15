@@ -1,5 +1,4 @@
 <?php
-require_once dirname(dirname(dirname(__DIR__))) . '/AbstractSniffUnitTest.php';
 
 final class DWS_Sniffs_Formatting_MultilineBracketedExpressionIndentSniffTest extends AbstractSniffUnitTest
 {
@@ -15,6 +14,6 @@ final class DWS_Sniffs_Formatting_MultilineBracketedExpressionIndentSniffTest ex
 
     protected function _getSniffName()
     {
-        return 'DWS.Formatting.MultilineBracketedExpressionIndent';
+        return '/DWS/Sniffs/Formatting/MultilineBracketedExpressionIndentSniff.php';
     }
 }

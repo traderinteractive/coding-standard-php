@@ -21,13 +21,6 @@ use PHPUnit\Framework\TestCase;
 abstract class AbstractSniffUnitTest extends TestCase
 {
     /**
-     * The PHP_CodeSniffer object used for testing.
-     *
-     * @var PHP_CodeSniffer
-     */
-    protected static $_phpcs = null;
-
-    /**
      * Tests the extending classes Sniff class.
      *
      * @return void
@@ -36,13 +29,10 @@ abstract class AbstractSniffUnitTest extends TestCase
      */
     public final function runTest()
     {
-        if (self::$_phpcs === null) {
-            self::$_phpcs = new PHP_CodeSniffer();
-            self::$_phpcs->cli->setCommandLineValues(['-s']);
-        }
-
-        self::$_phpcs->process([], 'DWS', [$this->_getSniffName()]);
-        self::$_phpcs->setIgnorePatterns([]);
+        $config = new \PHP_CodeSniffer\Config();
+        $ruleset = new \PHP_CodeSniffer\Ruleset($config);
+        $ruleset->registerSniffs([dirname(__DIR__) . $this->_getSniffName()], [], []);
+        $ruleset->populateTokenListeners();
 
         $testFile = dirname(__DIR__) . '/tests/' . str_replace('_', '/', get_class($this)) . '.inc';
         if (!file_exists($testFile)) {
@@ -52,7 +42,8 @@ abstract class AbstractSniffUnitTest extends TestCase
 
         $phpcsFile = null;
         try {
-            $phpcsFile = self::$_phpcs->processFile($testFile);
+            $phpcsFile = new \PHP_CodeSniffer\Files\LocalFile($testFile, $ruleset, $config);
+            $phpcsFile->process();
         } catch (Exception $e) {
             $this->fail("An unexpected exception has been caught: {$e->getMessage()}");
         }
@@ -73,12 +64,12 @@ abstract class AbstractSniffUnitTest extends TestCase
     /**
      * Generate a list of test failures for a given sniffed file.
      *
-     * @param PHP_CodeSniffer_File $file The file being tested.
+     * @param PHP_CodeSniffer\Files\File $file The file being tested.
      *
      * @return array
-     * @throws PHP_CodeSniffer_Exception
+     * @throws \PHP_CodeSniffer\Exception\RuntimeException
      */
-    public function generateFailureMessages(PHP_CodeSniffer_File $file)
+    public function generateFailureMessages(\PHP_CodeSniffer\Files\File $file)
     {
         $testFile = $file->getFilename();
         $foundErrors = $file->getErrors();
@@ -87,11 +78,11 @@ abstract class AbstractSniffUnitTest extends TestCase
         $expectedWarnings = $this->getWarningList(basename($testFile));
 
         if (!is_array($expectedErrors)) {
-            throw new PHP_CodeSniffer_Exception('getErrorList() must return an array');
+            throw new \PHP_CodeSniffer\Exception\RuntimeException('getErrorList() must return an array');
         }
 
         if (!is_array($expectedWarnings)) {
-            throw new PHP_CodeSniffer_Exception('getWarningList() must return an array');
+            throw new \PHP_CodeSniffer\Exception\RuntimeException('getWarningList() must return an array');
         }
 
         /*

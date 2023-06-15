@@ -6,13 +6,19 @@
  * @subpackage Sniffs
  */
 
+namespace DWS\Sniffs\Arrays;
+
+use DWS\Helpers;
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Files\File;
+
 /**
  * A test to ensure that commas in arrays are set with proper whitespace.
  *
  * @package DWS
  * @subpackage Sniffs
  */
-final class DWS_Sniffs_Arrays_CommaSpacingSniff implements PHP_CodeSniffer_Sniff
+final class CommaSpacingSniff implements Sniff
 {
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -27,20 +33,20 @@ final class DWS_Sniffs_Arrays_CommaSpacingSniff implements PHP_CodeSniffer_Sniff
     /**
      * Processes this sniff, when one of its tokens is encountered.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The current file being checked.
+     * @param PHP_CodeSniffer\Files\File $phpcsFile The current file being checked.
      * @param int $stackPtr The position of the current token in the stack passed in $tokens.
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-        $arrayStart = DWS_Helpers_Bracket::bracketStart($phpcsFile, $stackPtr);
-        $arrayEnd = DWS_Helpers_Bracket::bracketEnd($phpcsFile, $stackPtr);
+        $arrayStart = Helpers\Bracket::bracketStart($phpcsFile, $stackPtr);
+        $arrayEnd = Helpers\Bracket::bracketEnd($phpcsFile, $stackPtr);
 
         $isSingleLine = $tokens[$arrayStart]['line'] === $tokens[$arrayEnd]['line'];
 
-        foreach (DWS_Helpers_Array::commaPositions($phpcsFile, $arrayStart) as $comma) {
+        foreach (Helpers\Arrays::commaPositions($phpcsFile, $arrayStart) as $comma) {
             if ($tokens[$comma - 1]['code'] === T_WHITESPACE) {
                 $phpcsFile->addError('No whitespace allowed before commas in an array', $comma, 'SpaceBeforeComma');
             }

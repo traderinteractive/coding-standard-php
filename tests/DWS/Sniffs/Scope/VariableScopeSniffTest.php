@@ -1,4 +1,5 @@
 <?php
+
 final class DWS_Sniffs_Scope_VariableScopeSniffTest extends AbstractSniffUnitTest
 {
     public function getErrorList()
@@ -13,6 +14,6 @@ final class DWS_Sniffs_Scope_VariableScopeSniffTest extends AbstractSniffUnitTes
 
     protected function _getSniffName()
     {
-        return 'DWS.Scope.VariableScope';
+        return '/DWS/Sniffs/Scope/VariableScopeSniff.php';
     }
 }

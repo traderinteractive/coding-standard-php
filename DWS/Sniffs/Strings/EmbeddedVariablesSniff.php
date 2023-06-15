@@ -6,13 +6,18 @@
  * @subpackage Sniffs
  */
 
+namespace DWS\Sniffs\Strings;
+
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Files\File;
+
 /**
  * Makes sure that all variables embedded in strings are enclosed in braces.
  *
  * @package DWS
  * @subpackage Sniffs
  */
-final class DWS_Sniffs_Strings_EmbeddedVariablesSniff implements PHP_CodeSniffer_Sniff
+final class EmbeddedVariablesSniff implements Sniff
 {
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -27,12 +32,12 @@ final class DWS_Sniffs_Strings_EmbeddedVariablesSniff implements PHP_CodeSniffer
     /**
      * Processes this test, when one of its tokens is encountered.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int $stackPtr The position of the current token in the stack passed in $tokens.
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 

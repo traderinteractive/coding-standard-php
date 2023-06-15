@@ -8,6 +8,12 @@
  * @subpackage Sniffs
  */
 
+namespace DWS\Sniffs\WhiteSpace;
+
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Tokens;
+
 /**
  * Verifies that no whitespace proceeds the first content of the file, that there is
  * no whitespace at the end of a line, that there are no extra new lines before or after
@@ -16,7 +22,7 @@
  * @package DWS
  * @subpackage Sniffs
  */
-final class DWS_Sniffs_WhiteSpace_SuperfluousWhitespaceSniff implements PHP_CodeSniffer_Sniff
+final class SuperfluousWhitespaceSniff implements Sniff
 {
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -25,7 +31,7 @@ final class DWS_Sniffs_WhiteSpace_SuperfluousWhitespaceSniff implements PHP_Code
      */
     public function register()
     {
-        $tokens = PHP_CodeSniffer_Tokens::$scopeOpeners;
+        $tokens = Tokens::$scopeOpeners;
         $tokens[] = T_OPEN_TAG;
         $tokens[] = T_WHITESPACE;
         $tokens[] = T_COMMENT;
@@ -35,12 +41,12 @@ final class DWS_Sniffs_WhiteSpace_SuperfluousWhitespaceSniff implements PHP_Code
     /**
      * Processes this sniff, when one of its tokens is encountered.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
      * @param int $stackPtr The position of the current token in the stack passed in $tokens.
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $tokenContent = null;
@@ -61,7 +67,7 @@ final class DWS_Sniffs_WhiteSpace_SuperfluousWhitespaceSniff implements PHP_Code
 
             $phpcsFile->addError('Additional whitespace found at start of file', $stackPtr, 'StartFile');
         } elseif (
-            in_array($tokens[$stackPtr]['code'], PHP_CodeSniffer_Tokens::$scopeOpeners)
+            in_array($tokens[$stackPtr]['code'], Tokens::$scopeOpeners)
             && array_key_exists('scope_opener', $tokens[$stackPtr])
         ) {
             $classOpen = $tokens[$stackPtr]['scope_opener'];
