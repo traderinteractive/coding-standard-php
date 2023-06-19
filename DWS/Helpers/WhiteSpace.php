@@ -16,7 +16,7 @@ use PHP_CodeSniffer\Files\File;
  * @package DWS
  * @subpackage Helpers
  */
-final class Whitespace
+final class WhiteSpace
 {
     /**
      * Returns the indentation level of the requested line.

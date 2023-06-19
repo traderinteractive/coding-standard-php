@@ -33,7 +33,7 @@
     },
     "autoload": {
         "psr-4": {
-            "DWS\\": "src"
+            "DWS\\": "DWS"
         }
     },
     "scripts": {
